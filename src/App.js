@@ -6,12 +6,14 @@ function App() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const backendURL = 'https://quicknotes-backend-c2da.onrender.com'; // Render backend URL
+  
 
   // Fetch notes from the Flask API
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get(`${backendURL}/api/notes`);
+      const response = await axios.get('https://quicknotes-backend-c2da.onrender.com/api/notes');
+
         setNotes(response.data);
       } catch (error) {
         console.error('Error fetching notes:', error);
