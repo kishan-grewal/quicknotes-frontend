@@ -5,12 +5,13 @@ function App() {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const backendURL = 'https://quicknotes-backend-c2da.onrender.com'; // Render backend URL
 
   // Fetch notes from the Flask API
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:5000/api/notes');
+        const response = await axios.get(`${backendURL}/api/notes`);
         setNotes(response.data);
       } catch (error) {
         console.error('Error fetching notes:', error);
@@ -18,13 +19,13 @@ function App() {
     };
 
     fetchNotes();
-  }, []);
+  }, [backendURL]);
 
   // Handle form submission to add a new note
   const handleAddNote = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/notes', {
+      const response = await axios.post(`${backendURL}/api/notes`, {
         title,
         content,
       });
