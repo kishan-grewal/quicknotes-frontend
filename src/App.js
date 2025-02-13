@@ -6,7 +6,8 @@ function App() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const backendURL = 'https://quicknotes-backend-c2da.onrender.com'; // Render backend URL
-  
+
+
 
   // Fetch notes from the Flask API
   useEffect(() => {
