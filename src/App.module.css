@@ -1,50 +1,123 @@
-/* App.module.css */
+/* Use CSS variables for light mode by default */
+:root {
+  --bg-color: #f5f5f5;
+  --text-color: #333;
+  --header-bg-color: #fff;
+  --button-bg-color: #eaeaea;
+  --button-text-color: #333;
+  --border-color: #ccc;
+}
+
+/* Override variables in dark mode */
+.darkMode {
+  --bg-color: #343541;       /* Main background (dark) */
+  --text-color: #ffffff;     /* Main text color */
+  --header-bg-color: #202123;/* Top bar background */
+  --button-bg-color: #444654;/* Button background in dark mode */
+  --button-text-color: #ffffff;
+  --border-color: #555;
+}
 
 /* Container for the whole app */
 .container {
-  padding: 20px;
-  font-family: sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Top bar with heading + dark mode button */
+.topBar {
+  background-color: var(--header-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* Headline styling */
 .header {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* Dark mode toggle button */
+.darkModeButton {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.darkModeButton:hover {
+  opacity: 0.8;
+}
+
+/* Main content area */
+.mainArea {
+  flex: 1;
+  padding: 20px;
 }
 
 /* Form container */
 .form {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 /* Individual inputs */
 .formInput {
-  margin-right: 10px;
-  padding: 5px;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-color);
+  color: var(--text-color);
 }
 
 /* Buttons styling */
 .button {
-  padding: 5px 10px;
+  padding: 8px 16px;
   cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  font-size: 0.9rem;
+}
+
+.button:hover {
+  opacity: 0.8;
 }
 
 /* List of notes */
 .notesList {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 /* Each note item */
 .noteItem {
   margin-bottom: 10px;
+  padding: 10px;
+  background-color: var(--header-bg-color);
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
 }
 
 /* Clear notes button */
 .clearButton {
   margin-top: 10px;
-  padding: 5px 10px;
+  padding: 8px 16px;
   cursor: pointer;
   background-color: #f44336; /* red */
   color: white;
@@ -52,7 +125,6 @@
   border-radius: 4px;
 }
 
-/* If you need a hover effect for the clear button, for example: */
 .clearButton:hover {
   background-color: #d32f2f;
 }
