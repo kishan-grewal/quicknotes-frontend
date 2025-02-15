@@ -1,0 +1,58 @@
+/* App.module.css */
+
+/* Container for the whole app */
+.container {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+/* Headline styling */
+.header {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form container */
+.form {
+  margin-bottom: 20px;
+}
+
+/* Individual inputs */
+.formInput {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+/* Buttons styling */
+.button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* List of notes */
+.notesList {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Each note item */
+.noteItem {
+  margin-bottom: 10px;
+}
+
+/* Clear notes button */
+.clearButton {
+  margin-top: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #f44336; /* red */
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+/* If you need a hover effect for the clear button, for example: */
+.clearButton:hover {
+  background-color: #d32f2f;
+}

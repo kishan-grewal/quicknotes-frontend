@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from './App.module.css'; // Import the CSS module
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  // Your backend URL (already set to Render):
+  // Your backend URL
   const backendURL = 'https://quicknotes-backend-c2da.onrender.com';
 
   // Fetch notes on mount
@@ -39,14 +40,12 @@ function App() {
     }
   };
 
-  // Clear all notes (DELETE each note by ID)
+  // Clear all notes (calls DELETE for each note)
   const handleClearNotes = async () => {
     try {
-      // Loop over notes and delete them one by one
       for (const note of notes) {
         await axios.delete(`${backendURL}/api/notes/${note.id}`);
       }
-      // Then clear the notes in local state
       setNotes([]);
     } catch (error) {
       console.error('Error clearing notes:', error);
@@ -54,26 +53,28 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>QuickNotes</h1>
+    <div className={styles.container}>
+      <h1 className={styles.header}>QuickNotes</h1>
       
-      <form onSubmit={handleAddNote} style={{ marginBottom: '20px' }}>
+      <form onSubmit={handleAddNote} className={styles.form}>
         <div>
           <input
+            className={styles.formInput}
             type="text"
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            style={{ marginRight: '10px', padding: '5px' }}
           />
           <input
+            className={styles.formInput}
             type="text"
             placeholder="Content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            style={{ marginRight: '10px', padding: '5px' }}
           />
-          <button type="submit" style={{ padding: '5px 10px' }}>Add Note</button>
+          <button type="submit" className={styles.button}>
+            Add Note
+          </button>
         </div>
       </form>
 
@@ -81,15 +82,14 @@ function App() {
         <p>No notes available.</p>
       ) : (
         <>
-          <ul>
+          <ul className={styles.notesList}>
             {notes.map((note) => (
-              <li key={note.id}>
+              <li key={note.id} className={styles.noteItem}>
                 <strong>{note.title}:</strong> {note.content}
               </li>
             ))}
           </ul>
-          {/* NEW BUTTON BELOW THE LIST */}
-          <button onClick={handleClearNotes} style={{ marginTop: '10px' }}>
+          <button onClick={handleClearNotes} className={styles.clearButton}>
             Clear All Notes
           </button>
         </>
