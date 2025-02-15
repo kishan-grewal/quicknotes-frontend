@@ -5,16 +5,15 @@ function App() {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const backendURL = 'https://quicknotes-backend-c2da.onrender.com'; // Render backend URL
 
+  // Your backend URL (already set to Render):
+  const backendURL = 'https://quicknotes-backend-c2da.onrender.com';
 
-
-  // Fetch notes from the Flask API
+  // Fetch notes on mount
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-      const response = await axios.get('https://quicknotes-backend-c2da.onrender.com/api/notes');
-
+        const response = await axios.get(`${backendURL}/api/notes`);
         setNotes(response.data);
       } catch (error) {
         console.error('Error fetching notes:', error);
@@ -24,7 +23,7 @@ function App() {
     fetchNotes();
   }, [backendURL]);
 
-  // Handle form submission to add a new note
+  // Add a new note
   const handleAddNote = async (e) => {
     e.preventDefault();
     try {
@@ -32,11 +31,25 @@ function App() {
         title,
         content,
       });
-      setNotes([...notes, response.data]); // Update the notes state with the new note
-      setTitle('');  // Clear the input fields
+      setNotes([...notes, response.data]);
+      setTitle('');
       setContent('');
     } catch (error) {
       console.error('Error adding note:', error);
+    }
+  };
+
+  // Clear all notes (DELETE each note by ID)
+  const handleClearNotes = async () => {
+    try {
+      // Loop over notes and delete them one by one
+      for (const note of notes) {
+        await axios.delete(`${backendURL}/api/notes/${note.id}`);
+      }
+      // Then clear the notes in local state
+      setNotes([]);
+    } catch (error) {
+      console.error('Error clearing notes:', error);
     }
   };
 
@@ -67,13 +80,19 @@ function App() {
       {notes.length === 0 ? (
         <p>No notes available.</p>
       ) : (
-        <ul>
-          {notes.map((note) => (
-            <li key={note.id}>
-              <strong>{note.title}:</strong> {note.content}
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul>
+            {notes.map((note) => (
+              <li key={note.id}>
+                <strong>{note.title}:</strong> {note.content}
+              </li>
+            ))}
+          </ul>
+          {/* NEW BUTTON BELOW THE LIST */}
+          <button onClick={handleClearNotes} style={{ marginTop: '10px' }}>
+            Clear All Notes
+          </button>
+        </>
       )}
     </div>
   );
